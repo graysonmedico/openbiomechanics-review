@@ -1,5 +1,36 @@
 ---
-title: "Analysis"
+title: "Myths"
 format: html
+execute:
+    echo: false
 ---
 
+```{r}
+library(tidyverse)
+
+# 1. Load Data
+df <- read_csv("data/pitcher_profiles.csv")
+
+# 2. Calculate the Correlation (R) manually
+# use="complete.obs" ensures we don't crash on missing data
+r_val <- cor(df$stride_length, df$pitch_speed_mph, use = "complete.obs")
+
+# 3. Create the Plot
+ggplot(df, aes(x = stride_length, y = pitch_speed_mph)) +
+  # Add the points (blue dots)
+  geom_point(color = "#2980b9", alpha = 0.6, size = 3) +
+  # Add the trend line (black dashed line)
+  geom_smooth(method = "lm", color = "black", linetype = "dashed") +
+  # Add Labels
+  labs(
+    title = paste0("Myth #1: The Stride Factor (r = ", round(r_val, 2), ")"),
+    subtitle = "Does a longer stride guarantee higher velocity?",
+    x = "Stride Length (% of Body Height)",
+    y = "Velocity (MPH)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(color = "gray50")
+  )
+```

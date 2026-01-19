@@ -8,7 +8,7 @@ website:
       - href: index.qmd
         text: Home
       - href: analysis.qmd
-        text: Analysis
+        text: Myths
 
       - href: about.qmd
         text: About This Project
