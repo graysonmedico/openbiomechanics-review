@@ -1,4 +1,25 @@
 ---
-title: "openbiomechanics"
+title: "Welcome to the Lab"
+format: html
 ---
 
+## How the Data is Captured
+
+This project analyzes biomechanics data from the **OpenBiomechanics Project**, an open-source initiative by Driveline Baseball.
+
+The data is captured in their motion capture lab using high-speed cameras and reflective markers placed on the athlete's body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.
+
+### Watch the Process
+Below is a video directly from the Driveline lab showing how the capture system works:
+
+{{< video https://www.youtube.com/watch?v=8jWZ0q8_0B0 >}}
+
+
+
+## About This Site
+
+I built this site to correlate **body kinematics** (how they move) with **pitch metrics** (how the ball flies).
+
+Navigate to the analysis tabs to see:
+* **Hip-Shoulder Separation:** Does stretching the core lead to more velocity?
+* **Arm Stress:** Which mechanics put the most torque on the elbow?

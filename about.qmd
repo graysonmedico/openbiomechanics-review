@@ -1,7 +1,8 @@
 ---
-title: "About"
+title: "About The Project"
 ---
 
+Reason i built this site
 
 make sure they work!
 
