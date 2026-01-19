@@ -1,0 +1,27 @@
+# --- Quarto Internals ---
+/.quarto/
+/_site/
+/_files/
+# Keep _freeze/ if you want faster publishing, ignore it if you want to force re-runs
+# /_freeze/ 
+
+# --- R Language Essentials (Positron creates these too) ---
+.Rhistory
+.RData
+.Ruserdata
+
+# --- Positron / VS Code Essentials (NEW) ---
+# Positron stores project-specific settings here
+.vscode/
+
+# --- RStudio Leftovers (Good to keep just in case) ---
+.Rproj.user
+
+# --- Data Safety (Biomechanics) ---
+*.csv
+*.c3d
+data/
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
