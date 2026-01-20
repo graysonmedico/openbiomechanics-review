@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Welcome to the Lab",
     "section": "",
-    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and reflective markers placed on the athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
+    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
   },
   {
     "objectID": "index.html#how-the-data-is-captured",
     "href": "index.html#how-the-data-is-captured",
     "title": "Welcome to the Lab",
     "section": "",
-    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and reflective markers placed on the athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
+    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
   },
   {
     "objectID": "index.html#about-this-site",
@@ -26,5 +26,19 @@
     "title": "About The Project",
     "section": "",
     "text": "Reason i built this site\nmake sure they work!\nLink to the GitHub Repository to THIS website\nWasserberger KW, Brady AC, Besky DM, Jones BR, Boddy KJ. The OpenBiomechanics Project: The open source initiative for anonymized, elite-level athletic motion capture data. (2022).\nLink to the openbiomechanics GitHub Repository"
+  },
+  {
+    "objectID": "analysis.html#the-longer-you-stride-the-harder-you-throw",
+    "href": "analysis.html#the-longer-you-stride-the-harder-you-throw",
+    "title": "The Stride Fallacy probably get rid of this",
+    "section": "“The LONGER you stride the HARDER you throw”",
+    "text": "“The LONGER you stride the HARDER you throw”\n\nThe Hypothesis\nConventional baseball wisdom suggests that: The farther you stride the harder you will throw. Is that true?"
+  },
+  {
+    "objectID": "analysis.html#the-data",
+    "href": "analysis.html#the-data",
+    "title": "The Stride Fallacy probably get rid of this",
+    "section": "The Data",
+    "text": "The Data\nWe analyzed stride length (normalized as a percentage of body height) versus fastball velocity for our pitcher cohort.\n\n\n\n\n\n\n\n\n\n\n🔻 Click Here for the Legend\n\n\nAxis's:\n Stride length is the linear distance from the pitching rubber to the center of the lead foot at foot contact.\n\n\nKey Insight:\n Manzi et al. (2022) found that increased stride length is associated with higher ball velocity.\n\n\nCitation: Manzi, J. E., et al. (2022). Journal of Sports Sciences."
   }
 ]
