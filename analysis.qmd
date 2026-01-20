@@ -1,36 +1,109 @@
 ---
-title: "Myths"
+title: The Stride Fallacy probably get rid of this 
 format: html
 execute:
     echo: false
 ---
 
+<br>
+
+## **"The LONGER you stride the HARDER you throw"**
+
+### The Hypothesis
+**Conventional baseball wisdom suggests that:**
+The farther you stride the harder you will throw. Is that true?
+
+# Parameters of Research
+<br>
+Stride length is calculated from the rubber to the back of the front foot. It is shown as a percent of the athletes height. (0.7 = 70% of height)
+
+
 ```{r}
+#| echo: false
+#| fig.cap: "J. E. Manzi et al., 2022, Journal of Sports Sciences, 40(3)"
+#| out.width: "80%"
+
+knitr::include_graphics("stridelength.jpg")
+```
+
+
+## The Data
+We analyzed stride length (normalized as a percentage of body height) versus fastball velocity for our pitcher cohort.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
 library(tidyverse)
+library(plotly)
 
 # 1. Load Data
 df <- read_csv("data/pitcher_profiles.csv")
 
-# 2. Calculate the Correlation (R) manually
-# use="complete.obs" ensures we don't crash on missing data
+# 2. Calculate Stats
 r_val <- cor(df$stride_length, df$pitch_speed_mph, use = "complete.obs")
+avg_stride <- mean(df$stride_length, na.rm = TRUE)
+avg_velo   <- mean(df$pitch_speed_mph, na.rm = TRUE)
 
-# 3. Create the Plot
-ggplot(df, aes(x = stride_length, y = pitch_speed_mph)) +
-  # Add the points (blue dots)
-  geom_point(color = "#2980b9", alpha = 0.6, size = 3) +
-  # Add the trend line (black dashed line)
-  geom_smooth(method = "lm", color = "black", linetype = "dashed") +
-  # Add Labels
+# 3. Create the Professional Plot
+p <- ggplot(df, aes(x = stride_length, y = pitch_speed_mph)) +
+  
+  # A. The Crosshairs (Quadrant Lines)
+  geom_vline(xintercept = avg_stride, linetype="dotted", color="grey60") +
+  geom_hline(yintercept = avg_velo, linetype="dotted", color="grey60") +
+  
+  # B. The Data Points (with Hover Text)
+  geom_point(aes(text = paste("<b>Pitcher:</b>", user, 
+                              "<br><b>Stride:</b>", round(stride_length, 2), "%",
+                              "<br><b>Velo:</b>", pitch_speed_mph, "mph")), 
+             color = "#2980b9", alpha = 0.7, size = 3) +
+  
+  # C. The Trend Line
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", se = FALSE) +
+  
+  # D. Labels & Theme
   labs(
-    title = paste0("Myth #1: The Stride Factor (r = ", round(r_val, 2), ")"),
-    subtitle = "Does a longer stride guarantee higher velocity?",
+    title = paste0("Stride Length vs. Velocity (r = ", round(r_val, 2), ")"),
     x = "Stride Length (% of Body Height)",
     y = "Velocity (MPH)"
   ) +
   theme_minimal() +
-  theme(
-    plot.title = element_text(face = "bold", size = 16),
-    plot.subtitle = element_text(color = "gray50")
-  )
+  theme(plot.title = element_text(face = "bold"))
+
+# 4. Make it Interactive
+ggplotly(p, tooltip = "text")
 ```
+<br>
+```{r}
+library(htmltools)
+
+# 1. Your Plot Code (from previous step)
+# print(final_output) 
+
+# 2. Create the Clickable Dropdown
+dropdown_menu <- tags$details(
+  style = "background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 5px; width: 100%;",
+  
+  # The "Title" that people click on
+  tags$summary(
+    style = "cursor: pointer; font-weight: bold; color: #007bff;",
+    "🔻 Click Here for the Legend"
+  ),
+  
+  # The content that appears when opened
+  tags$div(
+    style = "margin-top: 10px; color: #333;",
+    tags$p(tags$b("Axis's:"), " Stride length is the linear distance from the pitching rubber to the center of the lead foot at foot contact."),
+    tags$p(tags$b("Key Insight:"), " Manzi et al. (2022) found that increased stride length is associated with higher ball velocity."),
+    tags$p(tags$i("Citation: Manzi, J. E., et al. (2022). Journal of Sports Sciences.")
+    )
+  )
+)
+
+# 3. Display it
+dropdown_menu
+```
+<br>
+<br>
+<br>

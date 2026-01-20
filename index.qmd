@@ -7,7 +7,7 @@ format: html
 
 This project analyzes biomechanics data from the **OpenBiomechanics Project**, an open-source initiative by Driveline Baseball.
 
-The data is captured in their motion capture lab using high-speed cameras and reflective markers placed on the athlete's body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.
+The data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete's body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.
 
 ### Watch the Process
 Below is a video directly from the Driveline lab showing how the capture system works:
