@@ -1,52 +1,38 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the Lab",
+    "objectID": "analysis5.html",
+    "href": "analysis5.html",
+    "title": "Elbow Torque",
     "section": "",
-    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
+    "text": "Pitch velocity and elbow stress are related, but not perfectly linked. While harder throws usually have an increase elbow load, this chart shows that it is more likely, but not a guarentee."
   },
   {
-    "objectID": "index.html#how-the-data-is-captured",
-    "href": "index.html#how-the-data-is-captured",
-    "title": "Welcome to the Lab",
-    "section": "",
-    "text": "This project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\n\nBelow is a video directly from the Driveline lab showing how the capture system works:"
+    "objectID": "analysis5.html#overview",
+    "href": "analysis5.html#overview",
+    "title": "Elbow Torque",
+    "section": "Overview",
+    "text": "Overview\nThis figure evaluates the relationship between pitch velocity (pitch_speed_mph) and peak elbow varus moment (elbow_varus_moment) using motion-capture biomechanics data. In pitching, increasing velocity (“adding gas”) often comes with increased mechanical demands on the arm. A simple and transparent way to quantify that tradeoff is to measure how strongly pitch speed co-varies with a widely used proxy for medial elbow loading.\nWhy this matters: coaches and athletes frequently debate whether throwing harder necessarily means “more stress.” This visualization summarizes the population-level trend while also showing the individual variability that exists at the same velocity."
   },
   {
-    "objectID": "index.html#about-this-site",
-    "href": "index.html#about-this-site",
-    "title": "Welcome to the Lab",
-    "section": "About This Site",
-    "text": "About This Site\nI built this site to correlate body kinematics (how they move) with pitch metrics (how the ball flies).\nNavigate to the analysis tabs to see: * Hip-Shoulder Separation: Does stretching the core lead to more velocity? * Arm Stress: Which mechanics put the most torque on the elbow?"
+    "objectID": "analysis5.html#why-elbow-varus-moment",
+    "href": "analysis5.html#why-elbow-varus-moment",
+    "title": "Elbow Torque",
+    "section": "Why Elbow Varus Moment?",
+    "text": "Why Elbow Varus Moment?\nThe elbow varus moment is commonly used in pitching biomechanics as a mechanical proxy for the internal torques that resist elbow valgus loading during the throwing motion. In practical terms, higher values are interpreted as greater load demand at the elbow, especially during the high-stress portion of the acceleration phase. While it is not a direct measurement of ligament strain (e.g., UCL strain), it is a standard, interpretable metric for comparing relative elbow loading across pitches and athletes in laboratory-style biomechanics datasets.\nThis makes it a strong candidate for correlating with velocity because:\n\nIt is a direct output of inverse dynamics calculations from motion-capture + force data.\nIt is tightly connected to the throwing arm’s peak load window (where injury risk discussions tend to focus).\nIt serves as a widely recognized “stress” variable that can be communicated clearly to coaches, players, and evaluators."
   },
   {
-    "objectID": "analysis2.html",
-    "href": "analysis2.html",
-    "title": "Slot Efficency",
-    "section": "",
-    "text": "show a picture of one pitcher and then the circle that shows different slots"
+    "objectID": "analysis5.html#how-the-correlation-is-calculated",
+    "href": "analysis5.html#how-the-correlation-is-calculated",
+    "title": "Elbow Torque",
+    "section": "How the Correlation is Calculated",
+    "text": "How the Correlation is Calculated\nTo quantify the linear association between pitch speed and elbow varus moment, this analysis uses the Pearson correlation coefficient:\n\nInputs: paired observations of pitch_speed_mph and elbow_varus_moment for each pitch\nHandling missing values: use = \"complete.obs\" ensures only rows with both measurements present are included\nInterpretation:\n\nR = 1.00 indicates a perfect positive linear relationship\nR = 0.00 indicates no linear relationship\nR = -1.00 indicates a perfect negative linear relationship\n\n\nThe plotted trendline is a simple least-squares linear regression (lm) fit to the same paired observations. The shaded band (if shown in your plot settings) represents the 95% confidence interval around the estimated mean trend."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About The Project",
-    "section": "",
-    "text": "My name is Grayson Medico, a 2nd year @ New College of Florida\n\n\n\n\n\nJ. E. Manzi et al., 2022, Journal of Sports Sciences, 40(3)\n\n\n\n\n\n\n  GitHub    LinkedIn    Email    Socials \n\nLink to the GitHub Repository to THIS website\nWasserberger KW, Brady AC, Besky DM, Jones BR, Boddy KJ. The OpenBiomechanics Project: The open source initiative for anonymized, elite-level athletic motion capture data. (2022).\nLink to the openbiomechanics GitHub Repository"
-  },
-  {
-    "objectID": "analysis.html#the-longer-you-stride-the-harder-you-throw",
-    "href": "analysis.html#the-longer-you-stride-the-harder-you-throw",
-    "title": "The Stride Fallacy probably get rid of this",
-    "section": "“The LONGER you stride the HARDER you throw”",
-    "text": "“The LONGER you stride the HARDER you throw”\n\nThe Hypothesis\nConventional baseball wisdom suggests that: The farther you stride the harder you will throw. Is that true?"
-  },
-  {
-    "objectID": "analysis.html#the-data",
-    "href": "analysis.html#the-data",
-    "title": "The Stride Fallacy probably get rid of this",
-    "section": "The Data",
-    "text": "The Data\nWe analyzed stride length (normalized as a percentage of body height) versus fastball velocity for our pitcher cohort.\n\n\n\n\n\n\n\n\n\n\n🔻 Click Here for the Legend\n\n\nAxis's:\n Stride length is the linear distance from the pitching rubber to the center of the lead foot at foot contact.\n\n\nKey Insight:\n Manzi et al. (2022) found that increased stride length is associated with higher ball velocity.\n\n\nCitation: Manzi, J. E., et al. (2022). Journal of Sports Sciences."
+    "objectID": "analysis5.html#interpreting-this-figure-r-0.47",
+    "href": "analysis5.html#interpreting-this-figure-r-0.47",
+    "title": "Elbow Torque",
+    "section": "Interpreting This Figure (R = 0.47)",
+    "text": "Interpreting This Figure (R = 0.47)\nThe reported correlation in this figure is:\nR = 0.47\nThis indicates a moderate positive relationship: as pitch velocity increases, elbow varus moment tends to increase as well. Importantly, correlation reflects association—not causation—but the direction is biomechanically consistent with the idea that higher ball speeds generally require higher angular velocities and forces somewhere in the kinetic chain, which can elevate joint moments at the elbow.\nSo, pitch speed alone accounts for roughly ~22% of the variation in elbow varus moment in this sample. That means velocity is meaningfully related to elbow loading, but it is not the whole story.\n\nWhat the spread of points implies\nEven with a positive trend, the scatter shows substantial overlap: - Pitches thrown at similar velocities can show very different elbow moments - Some pitchers/pitches appear to achieve a given velocity with lower-than-typical elbow loading, while others show higher-than-typical loading\nThat pattern is valuable: it suggests that beyond velocity, elbow loading is also influenced by factors such as: - sequencing/timing (proximal-to-distal transfer) - trunk and pelvis contributions - lead-leg braking dynamics - arm path and joint positions at key events (e.g., foot plant / MER) - individual anthropometrics and movement solutions\nIn player development terms, this supports a professional, nuanced conclusion:\n\nThrowing harder is generally associated with higher elbow load demand, but mechanical efficiency and kinetic chain strategy can shift how “expensive” a given velocity is at the elbow."
   },
   {
     "objectID": "analysis3.html",
@@ -54,5 +40,61 @@
     "title": "You Must Balance",
     "section": "",
     "text": "library(readr)\nlibrary(ggplot2)\nlibrary(ggpubr)\nlibrary(plotly)\n\n\nAttaching package: 'plotly'\n\n\nThe following object is masked from 'package:ggplot2':\n\n    last_plot\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nThe following object is masked from 'package:graphics':\n\n    layout\n\n# 1. LOAD & FILTER\ndf &lt;- read_csv(\"data/pitcher_profiles.csv\")\n\nRows: 100 Columns: 79\n\n\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (1): throws\ndbl (78): user, pitch_count, session, pitch_speed_mph, max_shoulder_internal...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nplot_data &lt;- df[!is.na(df$cog_velo_pkh) & !is.na(df$pitch_speed_mph), ]\n\n# 2. CALCULATE CORRELATION MANUALLY\n# This prevents the \"weird symbols\" error in the interactive plot\ncor_val &lt;- cor(plot_data$cog_velo_pkh, plot_data$pitch_speed_mph)\nr_label &lt;- paste(\"R =\", round(cor_val, 2)) # Creates the text \"R = 0.18\"\n\n# 3. CREATE PLOT\nbalance_plot &lt;- ggplot(plot_data, aes(x = cog_velo_pkh, y = pitch_speed_mph)) + \n  \n  # Scatter Points\n  geom_point(aes(color = cog_velo_pkh, \n                 text = paste(\"Pitcher:\", user, \n                              \"&lt;br&gt;Session:\", session,\n                              \"&lt;br&gt;Pitch Speed:\", pitch_speed_mph, \"mph\",\n                              \"&lt;br&gt;Drift Speed:\", round(cog_velo_pkh, 2), \"m/s\")), \n             alpha = 0.7, size = 3) +\n  \n  scale_color_gradient(low = \"red\", high = \"green\", name = \"Drift Speed\") +\n  geom_smooth(method = \"lm\", color = \"black\", se = TRUE) +\n  \n  # --- THE FIX IS HERE ---\n  # We use annotate() instead of stat_cor(). \n  # This puts plain text on the graph that Plotly can read easily.\n  annotate(\"text\", \n           x = min(plot_data$cog_velo_pkh), \n           y = max(plot_data$pitch_speed_mph), \n           label = r_label, \n           hjust = 0, vjust = 1, size = 5, fontface = \"plain\") + \n  # -----------------------\n\n  labs(\n    title = \"Do You Need a 'Balance Point'?\",\n    subtitle = \"Relationship between Forward Momentum at Peak Leg Lift and Velocity\",\n    x = \"COG Velocity at Peak Knee Height (m/s)\",\n    y = \"Pitch Velocity (mph)\"\n  ) +\n  \n  geom_vline(xintercept = 0, linetype = \"dashed\", color = \"gray\") +\n  theme_minimal()\n\nWarning in geom_point(aes(color = cog_velo_pkh, text = paste(\"Pitcher:\", :\nIgnoring unknown aesthetics: text\n\n# 4. INTERACTIVE\nggplotly(balance_plot, tooltip = \"text\")\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "The LONGER you stride the HARDER you throw",
+    "section": "",
+    "text": "The Hypothesis\nConventional baseball wisdom suggests that: The farther you stride the harder you will throw. Is that true?\n\n\n\n\n\n\n\n\nParameters of Research\n Stride length is calculated from the rubber to the back of the front foot. It is shown as a percent of the athletes height. (0.7 = 70% of height)\n\n\n\n\n\nJ. E. Manzi et al., 2022, Journal of Sports Sciences, 40(3)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "My name is Grayson Medico.",
+    "section": "",
+    "text": "I am a student @ New College of Florida 28’ and play Baseball.\nGrayson (Red Tie), with Victor (brother)"
+  },
+  {
+    "objectID": "about.html#bridging-the-gap-between-feel-and-real",
+    "href": "about.html#bridging-the-gap-between-feel-and-real",
+    "title": "My name is Grayson Medico.",
+    "section": "Bridging the Gap Between “Feel” and “Real”",
+    "text": "Bridging the Gap Between “Feel” and “Real”\n Baseball has always been filled with traditional wisdom—cues and mechanics that have been passed down for decades. But as a player, I often found myself asking: Is this actually true? Or is it just what we’ve always been told?\nI created this project to find those answers."
+  },
+  {
+    "objectID": "about.html#the-mission",
+    "href": "about.html#the-mission",
+    "title": "My name is Grayson Medico.",
+    "section": "The Mission",
+    "text": "The Mission\n My goal was to take high-level, open-source biomechanics data and make it accessible. I wanted to move beyond the guesswork and see the actual correlations that drive velocity, health, and efficiency on the mound.\nAs a Player: I wanted to make more informed decisions about my own training, understanding how my body moves and how to optimize it for peak performance.\nAs a Coach: I wanted to ensure that the advice I give isn’t just repetition, but rooted in fact. This project allows me to help other athletes develop faster and safer."
+  },
+  {
+    "objectID": "about.html#powered-by-open-data",
+    "href": "about.html#powered-by-open-data",
+    "title": "My name is Grayson Medico.",
+    "section": "Powered by Open Data",
+    "text": "Powered by Open Data\n This analysis utilizes data from the OpenBiomechanics Project, a revolutionary open-source initiative that provides high-fidelity motion capture data to the public. By leveraging this resource, we can democratize access to elite-level sports science, proving that you don’t need a million-dollar lab to learn the truth about the game."
+  },
+  {
+    "objectID": "analysis2.html",
+    "href": "analysis2.html",
+    "title": "Slot Efficiency",
+    "section": "",
+    "text": "show a picture of one pitcher and then the circle that shows different slots"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Testing Common Pitching Philosophy’s",
+    "section": "",
+    "text": "The LONGER you stride the HARDER you throw - Stride Fallacy link them\nSlot - Slot Efficiency\nPush Off - Push Off\nRotate your hips fast to throw harder - The Hips Do Lie\nThe HARDER you throw the MORE stress on the elbow - Elbow Torque"
+  },
+  {
+    "objectID": "index.html#how-the-data-is-captured",
+    "href": "index.html#how-the-data-is-captured",
+    "title": "Testing Common Pitching Philosophy’s",
+    "section": "How the Data is Captured",
+    "text": "How the Data is Captured\nThis project analyzes biomechanics data from the OpenBiomechanics Project, an open-source initiative by Driveline Baseball.\nThe data is captured in their motion capture lab using high-speed cameras and computer vision to track an athlete’s body. This allows for sub-millimeter accuracy in tracking joint centers and skeletal movement.\n\nWatch the Process\nBelow is a video directly from the Driveline lab showing how the capture system works:"
   }
 ]
