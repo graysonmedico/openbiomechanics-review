@@ -18,7 +18,7 @@ website:
             href: analysis3.qmd
 
       - href: about.qmd
-        text: About This Project
+        text: About
 
   page-footer:
     background: "#2E5A38"  # Outfield Green

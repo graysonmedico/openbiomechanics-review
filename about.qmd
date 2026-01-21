@@ -2,12 +2,97 @@
 title: "About The Project"
 ---
 
-Reason i built this site
+My name is Grayson Medico, a 2nd year @ New College of Florida
 
-make sure they work!
+```{r}
+#| echo: false
+#| fig.cap: "J. E. Manzi et al., 2022, Journal of Sports Sciences, 40(3)"
+#| out.width: "80%"
+
+knitr::include_graphics("stridelength.jpg")
+```
+
+```{r}
+#| echo: false
+#| results: asis
+
+library(htmltools)
+
+# 1. Define your links here
+my_links <- list(
+  github   = "(https://github.com/graysonmedico)",
+  linkedin = "(https://www.linkedin.com/in/grayson-medico-491ab7381/)",
+  email    = "mailto:graysonmedico@gmail.com",
+  x        = "(https://X.com/graysonmedico)"
+)
+
+# 2. Define the Custom "Field Theme" CSS
+# This makes the buttons Green initially, and "Clay" Orange when you hover
+css_style <- "
+<style>
+.btn-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #2E5A38; /* Outfield Green */
+  color: #FDFBF7 !important; /* Cream Text */
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: all 0.3s ease;
+  border: 2px solid #2E5A38;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-field:hover {
+  background-color: #C25E00; /* Infield Clay (Hover) */
+  border-color: #C25E00;
+  transform: translateY(-3px); /* Moves up slightly */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  color: #ffffff !important;
+}
+
+.btn-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center; /* Center buttons */
+  margin-top: 20px;
+}
+</style>
+"
+
+# 3. Create the HTML for the buttons
+# We use Bootstrap Icons (bi) which are built into Quarto
+buttons_html <- div(
+  class = "btn-container",
+  
+  # Github Button
+  a(href = my_links$github, class = "btn-field", target = "_blank",
+    tags$i(class = "bi bi-github"), "GitHub"),
+    
+  # LinkedIn Button
+  a(href = my_links$linkedin, class = "btn-field", target = "_blank",
+    tags$i(class = "bi bi-linkedin"), "LinkedIn"),
+    
+  # Email Button
+  a(href = my_links$email, class = "btn-field",
+    tags$i(class = "bi bi-envelope-fill"), "Email"),
+
+  # X (Twitter) Button
+  a(href = my_links$x, class = "btn-field", target = "_blank",
+    tags$i(class = "bi bi-twitter-x"), "Socials")
+)
+
+# 4. Render it
+cat(css_style)
+print(buttons_html)
+```
 
 
-[Link to the GitHub Repository to THIS website](https://github.com/graysonmedico/openbiomechanics-project)
+[Link to the GitHub Repository to THIS website](https://github.com/graysonmedico/openbiomechanics-review)
 
 *Wasserberger KW, Brady AC, Besky DM, Jones BR, Boddy KJ. The OpenBiomechanics Project: The open source initiative for anonymized, elite-level athletic motion capture data. (2022).*
 
