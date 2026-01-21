@@ -1,0 +1,136 @@
+---
+title: "Elbow Torque"
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(ggplot2)
+library(ggpubr)
+library(plotly)
+
+# 1. LOAD DATA (This must be active for the code to work)
+df <- read_csv("data/pitcher_profiles.csv") 
+
+# 2. FILTER DATA
+plot_data <- df[!is.na(df$pitch_speed_mph) & !is.na(df$elbow_varus_moment), ]
+
+# 3. CALCULATE CORRELATION
+cor_val <- cor(plot_data$pitch_speed_mph, plot_data$elbow_varus_moment)
+label_text <- paste("Correlation: R =", round(cor_val, 2))
+
+# 4. SMART LABEL POSITIONING
+x_range <- max(plot_data$pitch_speed_mph) - min(plot_data$pitch_speed_mph)
+text_x_pos <- min(plot_data$pitch_speed_mph) + (x_range * 0.05)
+
+text_data <- data.frame(
+  x = text_x_pos, 
+  y = max(plot_data$elbow_varus_moment), 
+  label = label_text
+)
+
+# 5. CREATE THE PLOT
+velo_stress_plot <- ggplot(plot_data, aes(x = pitch_speed_mph, y = elbow_varus_moment)) + 
+  
+  geom_point(aes(color = elbow_varus_moment, 
+                 text = paste("Pitcher:", user,
+                              "<br>Velocity:", round(pitch_speed_mph, 1), "mph",
+                              "<br>Elbow Torque:", round(elbow_varus_moment, 1), "Nm")), 
+             alpha = 0.8, size = 3) +
+  
+  scale_color_gradient(low = "blue", high = "red", name = "Elbow Torque\n(Nm)") +
+  
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", se = TRUE) +
+  
+  geom_text(data = text_data, aes(x = x, y = y, label = label),
+            color = "black", size = 5, hjust = 0, vjust = 1, fontface = "bold") +
+  
+  scale_x_continuous(expand = expansion(mult = 0.15)) +
+  scale_y_continuous(expand = expansion(mult = c(0.1, 0.2))) + 
+  
+  labs(
+    title = "Velocity vs. Elbow Stress",
+    subtitle = "Does throwing harder always create more torque?",
+    x = "Pitch Speed (mph)",
+    y = "Elbow Varus Moment (Nm)"
+  ) +
+  
+  theme_minimal()
+
+# 6. DISPLAY
+ggplotly(velo_stress_plot, tooltip = "text")
+```
+
+**Pitch velocity** and **elbow stress** are related, but not perfectly linked. While harder throws usually have an increase elbow load, this chart shows that it is more likely, but not a guarentee.
+<br>
+<br>
+
+## Overview
+
+This figure evaluates the relationship between **pitch velocity** (`pitch_speed_mph`) and **peak elbow varus moment** (`elbow_varus_moment`) using motion-capture biomechanics data. In pitching, increasing velocity (“adding gas”) often comes with increased mechanical demands on the arm. A simple and transparent way to quantify that tradeoff is to measure how strongly pitch speed co-varies with a widely used proxy for medial elbow loading.
+
+**Why this matters:** coaches and athletes frequently debate whether throwing harder necessarily means “more stress.” This visualization summarizes the population-level trend while also showing the individual variability that exists at the same velocity.
+
+---
+
+## Why Elbow Varus Moment?
+
+The **elbow varus moment** is commonly used in pitching biomechanics as a mechanical proxy for the **internal torques that resist elbow valgus loading** during the throwing motion. In practical terms, higher values are interpreted as **greater load demand at the elbow**, especially during the high-stress portion of the acceleration phase. While it is not a direct measurement of ligament strain (e.g., UCL strain), it is a standard, interpretable metric for comparing **relative elbow loading** across pitches and athletes in laboratory-style biomechanics datasets.
+
+This makes it a strong candidate for correlating with velocity because:
+
+- It is a **direct output** of inverse dynamics calculations from motion-capture + force data.
+- It is tightly connected to the throwing arm’s **peak load window** (where injury risk discussions tend to focus).
+- It serves as a widely recognized “stress” variable that can be communicated clearly to coaches, players, and evaluators.
+
+---
+
+## How the Correlation is Calculated
+
+To quantify the linear association between pitch speed and elbow varus moment, this analysis uses the **Pearson correlation coefficient**:
+
+- **Inputs:** paired observations of `pitch_speed_mph` and `elbow_varus_moment` for each pitch
+- **Handling missing values:** `use = "complete.obs"` ensures only rows with both measurements present are included
+- **Interpretation:**
+  - `R = 1.00` indicates a perfect positive linear relationship
+  - `R = 0.00` indicates no linear relationship
+  - `R = -1.00` indicates a perfect negative linear relationship
+
+The plotted trendline is a simple **least-squares linear regression** (`lm`) fit to the same paired observations. The shaded band (if shown in your plot settings) represents the **95% confidence interval** around the estimated mean trend.
+
+---
+
+## Interpreting This Figure (R = 0.47)
+
+The reported correlation in this figure is:
+
+**R = 0.47**
+
+This indicates a **moderate positive relationship**: as pitch velocity increases, elbow varus moment tends to increase as well. Importantly, correlation reflects association—not causation—but the direction is biomechanically consistent with the idea that higher ball speeds generally require higher angular velocities and forces somewhere in the kinetic chain, which can elevate joint moments at the elbow.
+
+So, pitch speed alone accounts for roughly **~22% of the variation** in elbow varus moment in this sample. That means velocity is meaningfully related to elbow loading, but it is **not the whole story**.
+
+### What the spread of points implies
+
+Even with a positive trend, the scatter shows substantial overlap:
+- Pitches thrown at similar velocities can show **very different elbow moments**
+- Some pitchers/pitches appear to achieve a given velocity with **lower-than-typical elbow loading**, while others show **higher-than-typical loading**
+
+That pattern is valuable: it suggests that beyond velocity, elbow loading is also influenced by factors such as:
+- sequencing/timing (proximal-to-distal transfer)
+- trunk and pelvis contributions
+- lead-leg braking dynamics
+- arm path and joint positions at key events (e.g., foot plant / MER)
+- individual anthropometrics and movement solutions
+
+In player development terms, this supports a professional, nuanced conclusion:
+
+> Throwing harder is generally associated with higher elbow load demand, but mechanical efficiency and kinetic chain strategy can shift how “expensive” a given velocity is at the elbow.
+
+---
+
+

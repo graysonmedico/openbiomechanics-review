@@ -18,16 +18,15 @@ knitr::include_graphics("stridelength.jpg")
 
 library(htmltools)
 
-# 1. Define your links here
+# 1. Define your links here (REMOVED PARENTHESES)
 my_links <- list(
-  github   = "(https://github.com/graysonmedico)",
-  linkedin = "(https://www.linkedin.com/in/grayson-medico-491ab7381/)",
+  github   = "https://github.com/graysonmedico",
+  linkedin = "https://www.linkedin.com/in/grayson-medico-491ab7381/",
   email    = "mailto:graysonmedico@gmail.com",
-  x        = "(https://X.com/graysonmedico)"
+  x        = "https://X.com/graysonmedico"
 )
 
 # 2. Define the Custom "Field Theme" CSS
-# This makes the buttons Green initially, and "Clay" Orange when you hover
 css_style <- "
 <style>
 .btn-field {
@@ -49,7 +48,7 @@ css_style <- "
 .btn-field:hover {
   background-color: #C25E00; /* Infield Clay (Hover) */
   border-color: #C25E00;
-  transform: translateY(-3px); /* Moves up slightly */
+  transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   color: #ffffff !important;
 }
@@ -58,37 +57,33 @@ css_style <- "
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: center; /* Center buttons */
+  justify-content: center;
   margin-top: 20px;
 }
 </style>
 "
 
 # 3. Create the HTML for the buttons
-# We use Bootstrap Icons (bi) which are built into Quarto
 buttons_html <- div(
   class = "btn-container",
   
-  # Github Button
   a(href = my_links$github, class = "btn-field", target = "_blank",
     tags$i(class = "bi bi-github"), "GitHub"),
     
-  # LinkedIn Button
   a(href = my_links$linkedin, class = "btn-field", target = "_blank",
     tags$i(class = "bi bi-linkedin"), "LinkedIn"),
     
-  # Email Button
   a(href = my_links$email, class = "btn-field",
     tags$i(class = "bi bi-envelope-fill"), "Email"),
 
-  # X (Twitter) Button
   a(href = my_links$x, class = "btn-field", target = "_blank",
     tags$i(class = "bi bi-twitter-x"), "Socials")
 )
 
 # 4. Render it
 cat(css_style)
-print(buttons_html)
+# FIX: Use as.character() and cat() to ensure clean HTML output
+cat(as.character(buttons_html))
 ```
 
 

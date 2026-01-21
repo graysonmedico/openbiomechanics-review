@@ -14,9 +14,14 @@ website:
             href: analysis.qmd
           - text: "Slot Efficencey"
             href: analysis2.qmd
-          - text: "Balance"
+          - text: "Push Off"
             href: analysis3.qmd
-
+          - text: "The Hips Do Lie"
+            href: analysis4.qmd
+          - text: "Elbow Torque"
+            href: analysis5.qmd
+      - href: takeaways.qmd
+        text: Actionable Takeaways   
       - href: about.qmd
         text: About
 

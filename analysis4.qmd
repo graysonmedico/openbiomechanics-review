@@ -1,0 +1,79 @@
+---
+title: "The Hips Do Lie"
+format: html
+---
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(ggplot2)
+library(ggpubr)
+library(plotly)
+
+# 1. LOAD DATA
+df <- read_csv("data/pitcher_profiles.csv")
+
+# 2. FILTER & PREPARE
+plot_data <- df[!is.na(df$rear_grf_mag_max) & !is.na(df$pitch_speed_mph), ]
+
+# Create "Drive Efficiency" (MPH per 100N)
+plot_data$drive_efficiency <- plot_data$pitch_speed_mph / (plot_data$rear_grf_mag_max / 100)
+
+# 3. CALCULATE CORRELATION
+cor_val <- cor(plot_data$rear_grf_mag_max, plot_data$pitch_speed_mph)
+label_text <- paste("Correlation: R =", round(cor_val, 2))
+
+# 4. SMART LABEL POSITIONING (The Fix)
+# Calculate the total width of the x-axis data
+x_range <- max(plot_data$rear_grf_mag_max) - min(plot_data$rear_grf_mag_max)
+
+# "Nudge" the text right by 5% of the total range so it doesn't touch the wall
+text_x_pos <- min(plot_data$rear_grf_mag_max) + (x_range * 0.05)
+
+text_data <- data.frame(
+  x = text_x_pos, 
+  y = max(plot_data$pitch_speed_mph), 
+  label = label_text
+)
+
+# 5. CREATE THE PLOT
+engine_plot <- ggplot(plot_data, aes(x = rear_grf_mag_max, y = pitch_speed_mph)) + 
+  
+  # Interactive Bubbles
+  geom_point(aes(fill = drive_efficiency, 
+                 size = pitch_speed_mph, 
+                 text = paste("Pitcher:", user,
+                              "<br>Velocity:", round(pitch_speed_mph, 1), "mph",
+                              "<br>Leg Drive:", round(rear_grf_mag_max, 0), "Newtons",
+                              "<br>Efficiency:", round(drive_efficiency, 2), "mph/100N")), 
+             shape = 21, color = "white", stroke = 1, alpha = 0.8) +
+  
+  # Color Scale
+  scale_fill_viridis_c(option = "turbo", name = "Efficiency\n(MPH per Force)") +
+  
+  # Trend Line
+  geom_smooth(method = "lm", color = "black", linetype = "dashed", se = TRUE) +
+  
+  # R-Value Label (Uses the nudged 'text_x_pos')
+  geom_text(data = text_data, aes(x = x, y = y, label = label),
+            color = "black", size = 5, hjust = 0, vjust = 1, fontface = "bold") +
+  
+  # EXPANSION FIX
+  # Expand X by 15% (sides) and Y by 20% (top) to give the label headroom
+  scale_x_continuous(expand = expansion(mult = 0.15)) +
+  scale_y_continuous(expand = expansion(mult = c(0.1, 0.2))) + 
+
+  # Labels
+  labs(
+    title = "The Engine Room: Does Leg Drive Create Velo?",
+    subtitle = "Rear Ground Reaction Force (Newtons) vs. Ball Velocity",
+    x = "Rear Leg Peak Force (Newtons)",
+    y = "Pitch Velocity (mph)"
+  ) +
+  
+  theme_minimal() +
+  theme(legend.position = "right")
+
+# 6. DISPLAY
+ggplotly(engine_plot, tooltip = "text")
+```

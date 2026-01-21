@@ -3,6 +3,14 @@ title: "Welcome to the Lab"
 format: html
 ---
 
+# Testing Common Pitching Philosophy's
+
+The LONGER you stride the HARDER you throw - Stride Fallacy link them
+Slot - Slot Efficency
+Push Off - Push Off
+Rotate your hips fast to throw harder - The Hips Do Lie
+The HARDER you throw the MORE stress on the elbow - Elbow Torque
+
 ## How the Data is Captured
 
 This project analyzes biomechanics data from the **OpenBiomechanics Project**, an open-source initiative by Driveline Baseball.
@@ -14,12 +22,3 @@ Below is a video directly from the Driveline lab showing how the capture system 
 
 {{< video https://www.youtube.com/watch?v=8jWZ0q8_0B0 >}}
 
-
-
-## About This Site
-
-I built this site to correlate **body kinematics** (how they move) with **pitch metrics** (how the ball flies).
-
-Navigate to the analysis tabs to see:
-* **Hip-Shoulder Separation:** Does stretching the core lead to more velocity?
-* **Arm Stress:** Which mechanics put the most torque on the elbow?
