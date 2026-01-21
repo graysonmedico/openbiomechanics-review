@@ -21,11 +21,18 @@
     "text": "About This Site\nI built this site to correlate body kinematics (how they move) with pitch metrics (how the ball flies).\nNavigate to the analysis tabs to see: * Hip-Shoulder Separation: Does stretching the core lead to more velocity? * Arm Stress: Which mechanics put the most torque on the elbow?"
   },
   {
+    "objectID": "analysis2.html",
+    "href": "analysis2.html",
+    "title": "Slot Efficency",
+    "section": "",
+    "text": "show a picture of one pitcher and then the circle that shows different slots"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About The Project",
     "section": "",
-    "text": "Reason i built this site\nmake sure they work!\nLink to the GitHub Repository to THIS website\nWasserberger KW, Brady AC, Besky DM, Jones BR, Boddy KJ. The OpenBiomechanics Project: The open source initiative for anonymized, elite-level athletic motion capture data. (2022).\nLink to the openbiomechanics GitHub Repository"
+    "text": "My name is Grayson Medico, a 2nd year @ New College of Florida\n\n\n\n\n\nJ. E. Manzi et al., 2022, Journal of Sports Sciences, 40(3)\n\n\n\n\n\n\n  GitHub    LinkedIn    Email    Socials \n\nLink to the GitHub Repository to THIS website\nWasserberger KW, Brady AC, Besky DM, Jones BR, Boddy KJ. The OpenBiomechanics Project: The open source initiative for anonymized, elite-level athletic motion capture data. (2022).\nLink to the openbiomechanics GitHub Repository"
   },
   {
     "objectID": "analysis.html#the-longer-you-stride-the-harder-you-throw",
@@ -40,5 +47,12 @@
     "title": "The Stride Fallacy probably get rid of this",
     "section": "The Data",
     "text": "The Data\nWe analyzed stride length (normalized as a percentage of body height) versus fastball velocity for our pitcher cohort.\n\n\n\n\n\n\n\n\n\n\n🔻 Click Here for the Legend\n\n\nAxis's:\n Stride length is the linear distance from the pitching rubber to the center of the lead foot at foot contact.\n\n\nKey Insight:\n Manzi et al. (2022) found that increased stride length is associated with higher ball velocity.\n\n\nCitation: Manzi, J. E., et al. (2022). Journal of Sports Sciences."
+  },
+  {
+    "objectID": "analysis3.html",
+    "href": "analysis3.html",
+    "title": "You Must Balance",
+    "section": "",
+    "text": "library(readr)\nlibrary(ggplot2)\nlibrary(ggpubr)\nlibrary(plotly)\n\n\nAttaching package: 'plotly'\n\n\nThe following object is masked from 'package:ggplot2':\n\n    last_plot\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nThe following object is masked from 'package:graphics':\n\n    layout\n\n# 1. LOAD & FILTER\ndf &lt;- read_csv(\"data/pitcher_profiles.csv\")\n\nRows: 100 Columns: 79\n\n\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (1): throws\ndbl (78): user, pitch_count, session, pitch_speed_mph, max_shoulder_internal...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nplot_data &lt;- df[!is.na(df$cog_velo_pkh) & !is.na(df$pitch_speed_mph), ]\n\n# 2. CALCULATE CORRELATION MANUALLY\n# This prevents the \"weird symbols\" error in the interactive plot\ncor_val &lt;- cor(plot_data$cog_velo_pkh, plot_data$pitch_speed_mph)\nr_label &lt;- paste(\"R =\", round(cor_val, 2)) # Creates the text \"R = 0.18\"\n\n# 3. CREATE PLOT\nbalance_plot &lt;- ggplot(plot_data, aes(x = cog_velo_pkh, y = pitch_speed_mph)) + \n  \n  # Scatter Points\n  geom_point(aes(color = cog_velo_pkh, \n                 text = paste(\"Pitcher:\", user, \n                              \"&lt;br&gt;Session:\", session,\n                              \"&lt;br&gt;Pitch Speed:\", pitch_speed_mph, \"mph\",\n                              \"&lt;br&gt;Drift Speed:\", round(cog_velo_pkh, 2), \"m/s\")), \n             alpha = 0.7, size = 3) +\n  \n  scale_color_gradient(low = \"red\", high = \"green\", name = \"Drift Speed\") +\n  geom_smooth(method = \"lm\", color = \"black\", se = TRUE) +\n  \n  # --- THE FIX IS HERE ---\n  # We use annotate() instead of stat_cor(). \n  # This puts plain text on the graph that Plotly can read easily.\n  annotate(\"text\", \n           x = min(plot_data$cog_velo_pkh), \n           y = max(plot_data$pitch_speed_mph), \n           label = r_label, \n           hjust = 0, vjust = 1, size = 5, fontface = \"plain\") + \n  # -----------------------\n\n  labs(\n    title = \"Do You Need a 'Balance Point'?\",\n    subtitle = \"Relationship between Forward Momentum at Peak Leg Lift and Velocity\",\n    x = \"COG Velocity at Peak Knee Height (m/s)\",\n    y = \"Pitch Velocity (mph)\"\n  ) +\n  \n  geom_vline(xintercept = 0, linetype = \"dashed\", color = \"gray\") +\n  theme_minimal()\n\nWarning in geom_point(aes(color = cog_velo_pkh, text = paste(\"Pitcher:\", :\nIgnoring unknown aesthetics: text\n\n# 4. INTERACTIVE\nggplotly(balance_plot, tooltip = \"text\")\n\n`geom_smooth()` using formula = 'y ~ x'"
   }
 ]
