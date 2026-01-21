@@ -70,7 +70,7 @@ engine_plot <- ggplot(plot_data, aes(x = rear_grf_mag_max, y = pitch_speed_mph))
 
   # Labels
   labs(
-    title = "The Engine Room: Does Leg Drive Create Velo?",
+    title = "Hip Rotation correlated to Pitching Velocity?",
     subtitle = "Rear Ground Reaction Force (Newtons) vs. Ball Velocity",
     x = "Rear Leg Peak Force (Newtons)",
     y = "Pitch Velocity (mph)"

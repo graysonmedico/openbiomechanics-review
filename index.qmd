@@ -15,7 +15,7 @@ knitr::include_graphics("bioskeleton.gif")
 ```
 <br>
 
-**The LONGER you stride the HARDER you throw** - Stride Fallacy link them
+**The LONGER you stride the HARDER you throw** - Stride Fallacy 
 <br>
 <br>
 
